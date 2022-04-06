@@ -14,7 +14,7 @@ def get_score(iden):
 
     if not score_data['valid']:
         code = score_data['code']
-        print(f'Error Code: {code}')
+        print(f'Error when fetching player score: {code}')
         exit()
 
     return score_data['score']
@@ -38,7 +38,14 @@ def add(cur, iden, name):
     print(f'Starting score: {score}')
 
 
-def reset(cur, iden):
+def reset(cur, iden, check_exists=True):
+    if check_exists:
+
+        length = cur.execute(f"SELECT ID = '{iden}' FROM Players").fetchall()
+        if length[0][0] != 1:
+            print(f'Player "{iden}" is not registered in this competition.')
+            return
+
     score = get_score(iden)
     cur.execute(
         'UPDATE Players '
@@ -70,7 +77,22 @@ def reset_all(cur):
     ids = [i[0] for i in cur.execute('SELECT ID FROM Players').fetchall()]
 
     for i in ids:
-        reset(cur, i)
+        reset(cur, i, False)
+
+
+def sync(cur):
+    ids = [i[0] for i in cur.execute('SELECT ID FROM Players').fetchall()]
+
+    for i in ids:
+        score = get_score(i)
+
+        cur.execute(
+            'UPDATE Players '
+            f'SET Curr = {score} '
+            f"WHERE ID = '{i}'"
+        )
+
+        print(f'Player "{i}" has been updated with current score {score}')
 
 
 if __name__ == '__main__':
@@ -80,6 +102,9 @@ if __name__ == '__main__':
 
     subparsers = parser.add_subparsers(required=True, dest='action')
 
+    sync_parser = subparsers.add_parser(
+        'sync', help='sync all players\' score from Codewars'
+    )
     init_parser = subparsers.add_parser('init', help='initializes a player')
     reset_parser = subparsers.add_parser(
         'resetAll',
@@ -123,3 +148,5 @@ if __name__ == '__main__':
             remove(cur, args.id)
         elif args.action == 'resetAll':
             reset_all(cur)
+        elif args.action == 'sync':
+            sync(cur)
