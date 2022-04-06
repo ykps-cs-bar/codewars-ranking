@@ -20,9 +20,9 @@ python tools.py add <codewars_id> <display_name>
 ```
 to initialize the tracking of that player. Note that if `<display_name>` contains space, wrap it in quotes, or just google how to use CLI idk make it work ajksgyasjhghbfhmnbsjbfmdss
 
-To set the accumulated (is that how you spell it?) points of a player, do:
+To restarts the tracking progress for one player (sets the display score to 0), do:
 ```sh
-python tools.py set <codewars_id> <target_score>
+python tools.py reset <codewars_id>
 ```
 
 To remove a player, do:
@@ -30,7 +30,7 @@ To remove a player, do:
 python tools.py remove <codewars_id>
 ```
 
-To set all accumulated scores to 0:
+To sync all players' starting score to their current score (effectively setting their display score to 0), do:
 ```sh
 python tools.py resetAll
 ```

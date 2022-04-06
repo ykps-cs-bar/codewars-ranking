@@ -21,12 +21,12 @@ if __name__ == '__main__':
     init_parser = subparsers.add_parser('init', help='initializes a player')
     add_parser = subparsers.add_parser('add', help='adds a player')
     set_parser = subparsers.add_parser(
-        'set', help='sets the score of a player'
+        'reset', help='resets the score of a player'
     )
     remove_parser = subparsers.add_parser('remove', help='removes a player')
     reset_parser = subparsers.add_parser(
         'resetAll',
-        help='sets all player\'s score to 0 (or to an optional value)'
+        help='resets all player\'s score'
     )
 
     id_params = {
@@ -43,16 +43,7 @@ if __name__ == '__main__':
     )
 
     set_parser.add_argument(**id_params)
-    set_parser.add_argument('score', type=int, help='the target score')
-
     remove_parser.add_argument(**id_params)
-
-    reset_parser.add_argument(
-        'score',
-        type=int,
-        default=0,
-        help='the target score to set everyone to'
-    )
 
     args = parser.parse_args()
 
