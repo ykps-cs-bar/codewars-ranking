@@ -52,7 +52,7 @@ def reset(cur, iden, check_exists=True):
         f'SET Start = {score}, Curr = {score} '
         f"WHERE ID = '{iden}'"
     )
-    print(f'Player "{iden}"\'s progress in this competition has be reset.')
+    print(f'Player "{iden}"\'s progress in this competition has been reset.')
     print(f'New starting score: {score}')
 
 
