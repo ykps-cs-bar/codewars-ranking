@@ -35,4 +35,10 @@ To sync all players' starting score to their current score (effectively setting 
 python tools.py resetAll
 ```
 
+And finally, to sync all players' current score from Codewars, do:
+```sh
+python tools.py sync
+```
+Syncing should be done regularly to keep the leaderboard updated, so write a script for that or something.
+
 that should be it k thx bye gotta do my math ia
