@@ -2,28 +2,56 @@ import argparse
 import sqlite3 as sql
 from random import choice
 
+from scrap import get_user_score
+
 
 DB_NAME = 'codewars_tracking.db'
 RAND_LIST = [chr(i) for i in range(97, 123)] + [chr(i) for i in range(65, 91)]
 
 
+def get_score(iden):
+    score_data = get_user_score(iden)
+
+    if not score_data['valid']:
+        code = score_data['code']
+        print(f'Error Code: {code}')
+        exit()
+
+    return score_data['score']
+
+
 def init_db(cur):
     cur.execute(
-        'CREATE TABLE IF NOT EXISTS players '
-        '(id text, name text, start int, curr int)'
+        'CREATE TABLE Players '
+        '(ID text PRIMARY KEY, Name text, Start int, Curr int) WITHOUT ROWID'
     )
 
 
 def add(cur, iden, name):
+    score = get_score(iden)
+    cur.execute(
+        'INSERT INTO Players '
+        '(ID, Name, Start, Curr) '
+        f"VALUES('{iden}', '{name}', {score}, {score})"
+    )
     print(f'Player "{iden}" has been registered with display name "{name}"')
+    print(f'Starting score: {score}')
 
 
-def reset(cur, id):
-    print(f'Player "{id}"\'s progress in this competition has be reset.')
+def reset(cur, iden):
+    score = get_score(iden)
+    cur.execute(
+        'UPDATE Players '
+        f'SET Start = {score}, Curr = {score} '
+        f"WHERE ID = '{iden}'"
+    )
+    print(f'Player "{iden}"\'s progress in this competition has be reset.')
+    print(f'New starting score: {score}')
 
 
-def remove(cur, id):
-    print(f'Player "{id}" has been removed.')
+def remove(cur, iden):
+    cur.execute(f"DELETE FROM Players WHERE ID = '{iden}'")
+    print(f'Player "{iden}" has been removed.')
 
 
 def reset_all(cur):
@@ -39,7 +67,10 @@ def reset_all(cur):
         print('Confirmation message does not match. Aborting.')
         return
 
-    print('bam')
+    ids = [i[0] for i in cur.execute('SELECT ID FROM Players').fetchall()]
+
+    for i in ids:
+        reset(cur, i)
 
 
 if __name__ == '__main__':
