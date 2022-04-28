@@ -42,3 +42,4 @@ python tools.py sync
 Syncing should be done regularly to keep the leaderboard updated, so write a script for that or something.
 
 that should be it k thx bye gotta do my math ia
+卷啊
