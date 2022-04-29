@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Codewars Competition</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+		<link rel='stylesheet' href='/static/styles/style.css'>
+    </head>
+    <body>
+        <h1>Leaderboard</h1>
+        <div>
+            {% for i in players %}
+            <div>
+                <p>{{ i['name'] }}</p>
+                <p>{{ i['score'] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
