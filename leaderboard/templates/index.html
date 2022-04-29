@@ -12,6 +12,7 @@
             {% for i in players %}
             <div>
                 <p>{{ i['name'] }}</p>
+                <img src="https://www.codewars.com/users/{{ i['id'] }}/badges/large" alt="">
                 <p>{{ i['score'] }}</p>
             </div>
             {% endfor %}
