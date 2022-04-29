@@ -7,13 +7,23 @@
 		<link rel='stylesheet' href='/static/styles/style.css'>
     </head>
     <body>
-        <h1>Leaderboard</h1>
-        <div>
+        <div id="title">
+            <span class="white">Leader</span> <span class="orange-back">board</span>
+        </div>
+        <div id="board" class="flex-container vert-flex">
+            <div class="flex-item flex-container column vert-center">
+                <span class="flex-item inner">Name</span>
+                <span class="flex-item center inner">Season Score</span>
+                <span class="flex-item center inner">Badge</span>
+            </div>
             {% for i in players %}
-            <div>
-                <p>{{ i['name'] }}</p>
-                <img src="https://www.codewars.com/users/{{ i['id'] }}/badges/large" alt="">
-                <p>{{ i['score'] }}</p>
+            <div class="flex-item flex-container column vert-center">
+                <div class="rank">{{ i['rank'] }}.</div>
+                <div class="flex-item flex-container vert-center">
+                    <span class="flex-item inner">{{ i['name'] }}</span>
+                    <span class="flex-item center inner">{{ i['score'] }}</span>
+                    <img class="flex-item badge right" src="https://www.codewars.com/users/{{ i['id'] }}/badges/large" alt="{{ i['id'] }}">
+                </div>
             </div>
             {% endfor %}
         </div>

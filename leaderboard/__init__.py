@@ -17,7 +17,12 @@ def home():
             {'name': name, 'id': user_id, 'score': curr - start}
             for (user_id, name, start, curr) in entries
         ]
-        data = sorted(data, key=lambda x: x['score'], reverse=True)
+        data = [
+            {'rank': idx, **i}
+            for idx, i in enumerate(
+                sorted(data, key=lambda x: x['score'], reverse=True), 1
+            )
+        ]
 
     return render_template(
         'index.html',
