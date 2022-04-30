@@ -14,17 +14,21 @@
             <div class="flex-item flex-container column vert-center">
                 <span class="flex-item inner">Name</span>
                 <span class="flex-item center inner">Season Score</span>
-                <span class="flex-item center inner">Badge</span>
+                <div class="badge-width center inner hide right">Badge</div>
             </div>
             {% for i in players %}
-            <div class="flex-item flex-container column vert-center">
-                <div class="rank">{{ i['rank'] }}.</div>
-                <div class="flex-item flex-container vert-center">
+                <div class="flex-item flex-container vert-center column">
+                    <div class="rank">
+                        {% if i['rank'] <= 3 %}
+                        <img src="/static/images/trophy.svg" class="medal medal-{{ i['rank'] }}" draggable="false">
+                        {% else %}
+                        {{ i['rank'] }}.
+                        {% endif %}
+                    </div>
                     <span class="flex-item inner">{{ i['name'] }}</span>
                     <span class="flex-item center inner">{{ i['score'] }}</span>
-                    <img class="flex-item badge right" src="https://www.codewars.com/users/{{ i['id'] }}/badges/large" alt="{{ i['id'] }}">
+                    <img class="flex-item badge right hide" src="https://www.codewars.com/users/{{ i['id'] }}/badges/large" alt="{{ i['id'] }}">
                 </div>
-            </div>
             {% endfor %}
         </div>
     </body>

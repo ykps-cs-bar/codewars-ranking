@@ -100,7 +100,8 @@ if __name__ == '__main__':
         description='Tools for manipulating the Codewars tracking process.'
     )
 
-    subparsers = parser.add_subparsers(required=True, dest='action')
+    subparsers = parser.add_subparsers(dest='action')
+    subparsers.required = True
 
     sync_parser = subparsers.add_parser(
         'sync', help='sync all players\' score from Codewars'

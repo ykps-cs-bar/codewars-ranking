@@ -11,15 +11,31 @@ body {
     margin: auto;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     body {
         width: 100%;
     }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
     body {
         width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .hide {
+        display: none;
+    }
+
+    #title {
+        font-size: 50px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    #title {
+        font-size: 100px;
     }
 }
 
@@ -28,7 +44,6 @@ body {
 }
 
 #title {
-    font-size: 100px;
     margin: 30px 0 30px 0;
     text-align: center;
     font-family: sans-serif;
@@ -46,6 +61,10 @@ body {
     background-color: #FF9900;
 }
 
+.badge-width {
+    flex: 0 0 350px;
+}
+
 .flex-container {
     display: flex;
     flex-wrap: nowrap;
@@ -59,28 +78,51 @@ body {
     text-align: right;
 }
 
-.vert-flex {
-    flex-direction: column;
-}
-
 .flex-item {
     flex: 1 1 50px;
 }
 
 .rank {
+    flex: 0 0 35px;
     color: #777;
     font-family: Courier;
-    margin-right: 20px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.medal {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.medal-1 {
+    filter: brightness(0) saturate(100%) invert(68%) sepia(91%)
+        saturate(1219%) hue-rotate(2deg) brightness(105%) contrast(99%);
+}
+
+.medal-2 {
+    filter: brightness(0) saturate(100%) invert(93%) sepia(0%)
+        saturate(495%) hue-rotate(154deg) brightness(111%) contrast(69%);
+}
+
+.medal-3 {
+    filter: brightness(0) saturate(100%) invert(47%) sepia(87%)
+        saturate(391%) hue-rotate(349deg) brightness(98%) contrast(90%);
 }
 
 .column {
-    padding: 0 20px 0 20px;
+    flex-direction: row;
+    padding: 0 25px 0 25px;
     background-color: #1E1E1E;
     border-bottom: 1px solid #404040;
 }
 
 .vert-center {
     align-items: center;
+}
+
+.vert-flex {
+    flex-direction: column;
 }
 
 .badge {
